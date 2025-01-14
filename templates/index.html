@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Laporan Pendataan Lapangan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        // Fungsi untuk menambahkan baris baru pada bagian kegiatan
+        function addActivityRow() {
+            const container = document.getElementById('activities');
+            const row = document.createElement('div');
+            row.className = "activity-row";
+            row.innerHTML = `
+                <hr>
+                <label>Tanggal Kegiatan:</label>
+                <input type="date" name="tanggal_kegiatan[]" required><br>
+                
+                <label>Uraian Kegiatan:</label>
+                <textarea name="uraian_kegiatan[]" required></textarea><br>
+                
+                <label>Permasalahan:</label>
+                <textarea name="permasalahan[]" required></textarea><br>
+                
+                <label>Pemecahan Masalah:</label>
+                <textarea name="pemecahan_masalah[]" required></textarea><br>
+                
+                <label>Keterangan:</label>
+                <textarea name="keterangan[]" required></textarea><br>
+            `;
+            container.appendChild(row);
+        }
+    </script>
+</head>
+<body>
+    <form action="/generate" method="post">
+        <h4>Form Laporan Pendataan Lapangan</h4>
+        
+        <!-- Bagian Informasi -->
+        <label>Nomor Surat Tugas:</label>
+        <input type="text" name="nomor_surat" required><br>
+        
+        <label>Tanggal Surat Tugas:</label>
+        <input type="date" name="tanggal_surat" required><br>
+        
+        <label>Nama Petugas:</label>
+        <input type="text" name="nama_petugas" required><br>
+        
+        <label>Periode Penugasan:</label>
+        <input type="text" name="periode" required><br><br>
+
+        <!-- Bagian Data Kegiatan -->
+        <h4>Data Kegiatan</h4>
+        <div id="activities">
+            <label>Tanggal Kegiatan:</label>
+            <input type="date" name="tanggal_kegiatan[]" required><br>
+            
+            <label>Uraian Kegiatan:</label>
+            <textarea name="uraian_kegiatan[]" required></textarea><br>
+            
+            <label>Permasalahan:</label>
+            <textarea name="permasalahan[]" required></textarea><br>
+            
+            <label>Pemecahan Masalah:</label>
+            <textarea name="pemecahan_masalah[]" required></textarea><br>
+            
+            <label>Keterangan:</label>
+            <textarea name="keterangan[]" required></textarea><br>
+        </div>
+        
+        <!-- Tombol Tambah Kegiatan -->
+        <button type="button" onclick="addActivityRow()">Tambah Kegiatan</button><br><br>
+        
+        <!-- Tombol Submit -->
+        <button type="submit">Generate Word</button>
+    </form>
+</body>
+</html>
